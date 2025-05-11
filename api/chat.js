@@ -1,18 +1,17 @@
-// api/chat.js
+// pages/api/chat.js
 export default async function handler(req, res) {
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+  const allowedOrigin = 'http://127.0.0.1:3000';
 
-  // Set CORS headers for all requests (must be at the top)
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-  // Handle preflight request
   if (req.method === 'OPTIONS') {
-    return res.status(200).end(); // Respond OK to OPTIONS
+    return res.status(200).end(); // Preflight OK
   }
 
-  // Reject any non-POST request (after setting CORS headers)
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Only POST allowed' });
   }
