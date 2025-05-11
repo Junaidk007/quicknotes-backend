@@ -1,15 +1,20 @@
-// pages/api/chat.js
 export default async function handler(req, res) {
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-  const allowedOrigin = 'http://127.0.0.1:3000';
 
-  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  // Dynamically allow the requesting origin
+  const origin = req.headers.origin;
+  const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000'];
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end(); // Preflight OK
+    return res.status(200).end(); // Preflight response
   }
 
   if (req.method !== 'POST') {
