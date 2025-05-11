@@ -1,9 +1,13 @@
 export default async function handler(req, res) {
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
-  // Dynamically allow the requesting origin
+  // Allowed origins (add GitHub Pages site)
   const origin = req.headers.origin;
-  const allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000'];
+  const allowedOrigins = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    'https://junaidk007.github.io'
+  ];
 
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
@@ -14,7 +18,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end(); // Preflight response
+    return res.status(200).end();
   }
 
   if (req.method !== 'POST') {
