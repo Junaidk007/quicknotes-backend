@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+  const OPENROUTER_API_KEY = process.env.API_KEY;
 
   // Allowed origins (add GitHub Pages site)
   const origin = req.headers.origin;
