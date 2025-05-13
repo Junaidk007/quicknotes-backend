@@ -1,12 +1,13 @@
 export default async function handler(req, res) {
-  const OPENROUTER_API_KEY = process.env.API_KEY;
+  const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
   // List of trusted origins (add frontend URLs here)
   const allowedOrigins = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
-    'https://junaidk007.github.io',
-    'http://127.0.0.1:5500'
+    'http://127.0.0.1:5500',
+    'https://junaidk007.github.io/QuickNotes.ai',
+    'https://junaidk007.github.io'
   ];
 
   const origin = req.headers.origin;
