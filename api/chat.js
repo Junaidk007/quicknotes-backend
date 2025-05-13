@@ -8,10 +8,10 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow Content-Type and Authorization headers
 
   // Handle preflight request (OPTIONS request)
-  if (req.method === 'OPTIONS') {
-    // Respond with status 200 to allow the OPTIONS request
-    return res.status(200).end();
-  }
+  // if (req.method === 'OPTIONS') {
+  //   // Respond with status 200 to allow the OPTIONS request
+  //   return res.status(200).end();
+  // }
 
   // Reject any non-POST request (after setting CORS headers)
   if (req.method !== 'POST') {
