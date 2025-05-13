@@ -1,26 +1,30 @@
 export default async function handler(req, res) {
   const OPENROUTER_API_KEY = process.env.API_KEY;
 
-  // Allowed origins (add GitHub Pages site)
-  const origin = req.headers.origin;
+  // List of trusted origins (add frontend URLs here)
   const allowedOrigins = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
     'https://junaidk007.github.io'
   ];
 
+  const origin = req.headers.origin;
+
+  // Dynamically set CORS origin only if it's allowed
   if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Origin', origin); // Secure: echoes only trusted origin
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
 
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
+  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Only POST allowed' });
   }
