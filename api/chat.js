@@ -14,9 +14,6 @@ export default async function handler(req, res) {
   // }
 
   // Reject any non-POST request (after setting CORS headers)
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST method is allowed' });
-  }
 
   try {
     // Forward the POST request to the OpenRouter API
@@ -36,3 +33,8 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Only POST method is allowed' });
+  }
