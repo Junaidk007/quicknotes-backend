@@ -8,10 +8,14 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow Content-Type and Authorization headers
 
   // Handle preflight request (OPTIONS request)
-  // if (req.method === 'OPTIONS') {
-  //   // Respond with status 200 to allow the OPTIONS request
-  //   return res.status(200).end();
-  // }
+  if (req.method === 'OPTIONS') {
+    // Respond with status 200 to allow the OPTIONS request
+    return res.status(200).end();
+  }
+
+   if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Only POST method is allowed' });
+  }
 
   // Reject any non-POST request (after setting CORS headers)
 
@@ -33,8 +37,3 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
-
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST method is allowed' });
-  }
