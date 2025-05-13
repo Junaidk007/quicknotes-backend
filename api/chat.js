@@ -6,8 +6,7 @@ export default async function handler(req, res) {
     'http://127.0.0.1:3000',
     'http://localhost:3000',
     'http://127.0.0.1:5500',
-    'https://junaidk007.github.io/QuickNotes.ai',
-    'https://junaidk007.github.io'
+    'https://junaidk007.github.io/QuickNotes.ai'
   ];
 
   const origin = req.headers.origin;
